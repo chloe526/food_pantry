@@ -21,7 +21,11 @@ The {non-profit name} team consists of {#} Cal Poly students. Over the course of
 
 - [Chloe Low](https://www.linkedin.com/in/chloe-is-low/) - Tech Lead
 - [Cole Porter](https://www.linkedin.com/in/coleporter0/) - Software Developer
+- [Rebecca Blau](https://www.linkedin.com/in/rebecca-blau/) - Software Developer
+- [Bryan Garcia](https://www.linkedin.com/) - Software Developer
+- [Giovanni Cosio](https://www.linkedin.com/in/giovanni-cosio/) - Software Developer
 - [Abed Nianaa](https://www.linkedin.com/in/abdelrhaman-nianaa-b83050314/) - Software Developer
+- [Nishant Sengupta](https://www.linkedin.com/in/nishant-sengupta-78b309411) - Software Developer
 
 ## Getting Started And Contributing
 
