@@ -21,6 +21,7 @@ The {non-profit name} team consists of {#} Cal Poly students. Over the course of
 
 - [Chloe Low](https://www.linkedin.com/in/chloe-is-low/) - Tech Lead
 - [First Last](https://www.linkedin.com/) - Software Developer
+- [Nishant Sengupta](https://www.linkedin.com/in/nishant-sengupta-78b309411) - Software Developer
 
 ## Getting Started And Contributing
 
