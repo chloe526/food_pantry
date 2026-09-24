@@ -20,6 +20,7 @@ Bootcamp mini project designing a fullstack website for the Calpoly Food Pantry.
 The {non-profit name} team consists of {#} Cal Poly students. Over the course of about 9 months, we worked as a team to deploy this web application. The team members are listed below:
 
 - [Chloe Low](https://www.linkedin.com/in/chloe-is-low/) - Tech Lead
+- [Cole Porter](https://www.linkedin.com/in/coleporter0/) - Software Developer
 - [Rebecca Blau](https://www.linkedin.com/in/rebecca-blau/) - Software Developer
 - [Bryan Garcia](https://www.linkedin.com/) - Software Developer
 - [Giovanni Cosio](https://www.linkedin.com/in/giovanni-cosio/) - Software Developer
