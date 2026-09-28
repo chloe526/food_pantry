@@ -1,10 +1,9 @@
 "use client";
-import Navbar from "@/components/Navbar";
+import "../globals.css";
 
 export default function Contact() {
   return (
     <main>
-      <Navbar />
       <h1>Contact Us</h1>
       <form id="contact-form">
         <input type="text" id="name" name="name" placeholder="Your Name" aria-label="Your Name" required />
