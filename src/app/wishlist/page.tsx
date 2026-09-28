@@ -50,8 +50,20 @@ export default function WishlistPage() {
       quantity: Number(quantity),
       available: false,
     };
+    // this is to check whether an inputted item already exists before adding it to the user's wishlist
+    const existingItemIndex = items.findIndex((item) => {
+      return item.name.toLowerCase() === foodName.toLowerCase();
+    });
 
-    setItems([...items, newItem]);
+    if (existingItemIndex !== -1) {
+      const updatedItems = [...items];
+
+      updatedItems[existingItemIndex].quantity += Number(quantity);
+
+      setItems(updatedItems);
+    } else {
+      setItems([...items, newItem]);
+    }
 
     setFoodName("");
     setCategory("");
@@ -77,8 +89,6 @@ export default function WishlistPage() {
 
   return (
     <>
-      <Navbar />
-
       <main>
         <h1>CalPoly Food Pantry Wishlist</h1>
         <p>Request food items you would like the pantry to carry.</p>
