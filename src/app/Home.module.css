@@ -1,0 +1,39 @@
+.mainCard {
+  background-color: rgb(188, 222, 188);
+  padding: 30px;
+  margin-left: 50px;
+  width: 50rem;
+}
+
+.mainCard h1 {
+  margin: 0px;
+}
+
+.btnPrimary {
+  background-color: green;
+  color: white;
+  padding: 10px;
+  text-decoration: none;
+}
+
+.btnSecondary {
+  border: 1px solid green;
+  background-color: white;
+  color: green;
+  padding: 10px;
+  text-decoration: none;
+}
+
+.cards {
+  display: flex;
+  flex-direction: row;
+  gap: 50px;
+  margin: 50px;
+}
+
+.quickInfo {
+  display: flex;
+  flex-direction: row;
+  gap: 50px;
+  margin-left: 50px;
+}
