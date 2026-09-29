@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const url: string = process.env.MONGO_URI as string;
 let connection: typeof mongoose;
-
+connection = null as unknown as typeof mongoose; // Initialize connection to null
 /**
  * Makes a connection to a MongoDB database. If a connection already exists, does nothing
  * Call this function before all api routes
