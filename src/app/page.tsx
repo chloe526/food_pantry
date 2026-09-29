@@ -6,7 +6,6 @@ import style from "./Home.module.css";
 export default function Home() {
   return (
     <div>
-      <h1>PolyPantry</h1>
       <div style={{ display: "flex", flexDirection: "column" }}>
         <div className={style.mainCard}>
           <h1>No Mustang Goes Hungry</h1>
