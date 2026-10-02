@@ -13,7 +13,7 @@ Welcome to the getting started page! Here is all you need to know to get this re
 
 1. Clone this repository `git clone <repo-url>`
 2. Run `npm i` at the root of the repository
-3. Create a .env file and retrieve secrets from your tech lead
+3. Create a .env file and paste the Mongo URI from your tech lead within
 4. Install IDE Extensions
    - [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
    - [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
