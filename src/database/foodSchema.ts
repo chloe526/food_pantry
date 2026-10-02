@@ -3,6 +3,7 @@ import { FoodItem } from "../types/foodItem.js";
 
 const FoodSchema = new Schema<FoodItem>(
   {
+    id: { type: String, required: true },
     name: { type: String, required: true },
     expiration_date: { type: String, required: true },
     category: { type: String, required: true },
