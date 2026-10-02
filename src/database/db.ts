@@ -1,6 +1,3 @@
-import dotenv from "dotenv";
-dotenv.config({ path: ".env.local" });
-
 import mongoose from "mongoose";
 
 const url: string = process.env.MONGO_URI as string;
