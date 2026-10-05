@@ -1,27 +1,14 @@
 .mainCard {
-  background-color: rgb(188, 222, 188);
+  background-color: #f8e08e;
   padding: 30px;
   margin-left: 50px;
   width: 50rem;
+  border-radius: 10px;
 }
 
 .mainCard h1 {
   margin: 0px;
-}
-
-.btnPrimary {
-  background-color: green;
-  color: white;
-  padding: 10px;
-  text-decoration: none;
-}
-
-.btnSecondary {
-  border: 1px solid green;
-  background-color: white;
-  color: green;
-  padding: 10px;
-  text-decoration: none;
+  color: #154734;
 }
 
 .cards {
@@ -35,5 +22,4 @@
   display: flex;
   flex-direction: row;
   gap: 50px;
-  margin-left: 50px;
 }

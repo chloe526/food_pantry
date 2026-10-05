@@ -7,7 +7,10 @@ export default function Navbar() {
       <Link href="/" className={styles.siteTitle}>
         PolyPantry
       </Link>
-      <ul>
+      <ul className={styles.links}>
+        <li>
+          <Link href="/">Home</Link>
+        </li>
         <li>
           <Link href="/about">About</Link>
         </li>

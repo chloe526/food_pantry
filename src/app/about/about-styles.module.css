@@ -1,54 +1,67 @@
-
-.outer{
-    margin-left: 25px;
-    padding: 20px
+.outerContainer {
+  margin-left: 25px;
+  padding: 20px;
 }
 
-.title{
-    color: #154734;
-}
-.info_div{
-    border: 2px solid transparent;
-    border-top: solid #154734;
-    gap:50px;
-    display: flex;
-    
+.title {
+  color: #154734;
+  margin: 0;
 }
 
-.info_div > *{
-    flex:1 1 0;
+.innerContainer {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 4rem;
+}
+
+.about {
+  gap: 50px;
+  display: flex;
+  flex-direction: column;
 }
 
 .side_div {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 12px;
 }
 
-.side_div div{
-    border: 2px solid #154734;
-    padding: 15px 15px;
-}
-.logi_header{
-    color:#154734;
-    margin-top: 0px;
-    margin-bottom: 4px;
-}
-.logi_info{
-    font-size: 18px;
-    color:rgb(41, 35, 35);
-    line-height: 1.5;
-    margin-top:8px;
+.infoDiv {
+  border: 2px solid #154734;
+  padding: 15px 15px;
 }
 
-.pantry_about{
-    font-size: 17px;
-    line-height: 1.5;
-}
-.disclaimer{
-    font-size: 12px;
-    color:rgb(98, 94, 94)
+.infoContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
 }
 
+.aboutContainer {
+  border-top: 3px solid #154734;
+  padding-top: 20px;
+}
 
+.logi_header {
+  color: #154734;
+  margin-top: 0px;
+  margin-bottom: 4px;
+}
+
+.logi_info {
+  font-size: 18px;
+  color: rgb(41, 35, 35);
+  line-height: 1.5;
+  margin-top: 8px;
+}
+
+.pantry_about {
+  font-size: 17px;
+  line-height: 1.5;
+}
+
+.disclaimer {
+  font-size: 12px;
+  color: rgb(98, 94, 94);
+}

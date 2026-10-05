@@ -1,7 +1,8 @@
 .card {
   padding: 20px;
   width: 14rem;
-  border: 1px solid grey;
+  border-radius: 10px;
+  background-color: #ccdbd5;
 }
 
 .card h3 {
