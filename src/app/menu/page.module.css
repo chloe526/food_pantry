@@ -1,5 +1,121 @@
-.menuGrid {
+/* Keep controls, messages, and cards centered with comfortable space at every screen size. */
+.menu {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 20px;
+  width: min(100%, 1200px);
+  margin: 0 auto;
+  padding: 24px 16px;
+}
+
+/* Give the page an identifiable heading without adding extra spacing above it. */
+.pageTitle {
+  margin: 0;
+}
+
+/* Give the name search more room than the category filter on wider screens. */
+.filters {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
   gap: 16px;
+}
+
+/* Allow both fields to shrink inside their grid columns without overflowing. */
+.filterGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+/* Use full-width, touch-friendly inputs so the controls remain usable on phones. */
+.filterGroup input,
+.filterGroup select {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 44px;
+  margin: 0;
+  padding: 10px;
+  border: 1px solid #9ca3af;
+  border-radius: 4px;
+  font: inherit;
+}
+
+/* Use consistent containers for loading, empty, error, and no-results feedback. */
+.statusMessage,
+.noResults {
+  margin: 0;
+  padding: 16px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  background: #f8fafc;
+}
+
+.errorState,
+.noResults {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.errorState {
+  border-color: #fecaca;
+  background: #fef2f2;
+  color: #991b1b;
+}
+
+.errorState p,
+.noResults p,
+.resultCount {
+  margin: 0;
+}
+
+/* Provide clear keyboard and pointer feedback for recovery actions. */
+.actionButton {
+  min-height: 40px;
+  padding: 8px 12px;
+  border: 1px solid #166534;
+  border-radius: 4px;
+  background: #166534;
+  color: #ffffff;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.actionButton:hover {
+  background: #14532d;
+}
+
+.actionButton:focus-visible {
+  outline: 3px solid #86efac;
+  outline-offset: 2px;
+}
+
+/* A responsive grid prevents cards from becoming too narrow on either desktop or mobile. */
+.menuGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+  gap: 16px;
+}
+
+/* Stack the search controls before the layout gets too narrow for side-by-side fields. */
+@media (max-width: 640px) {
+  .filters {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+  }
+
+  .filterGroup input,
+  .filterGroup select {
+    min-height: 48px;
+  }
+}
+
+/* Trim outer padding on small phones while preserving readable card widths. */
+@media (max-width: 480px) {
+  .menu {
+    padding: 16px 12px;
+  }
 }

@@ -1,8 +1,46 @@
+/* Let each card fill its responsive grid cell without overflowing on small screens. */
 .foodcard {
-  margin: 16px 0;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+  height: 100%;
   padding: 16px;
-  width: 20%;
   border: 1px solid #d1d5db;
   border-radius: 12px;
   background: #f8fafc;
+}
+
+/* Reset default margins and safely wrap long item names or category labels. */
+.foodcard h2,
+.foodcard p {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.foodcard h2 {
+  font-size: clamp(1.15rem, 2vw, 1.5rem);
+  line-height: 1.25;
+}
+
+/* Make availability easy to scan while keeping the regular quantity readable. */
+.availability {
+  font-weight: 600;
+}
+
+.outOfStock {
+  align-self: flex-start;
+  padding: 4px 8px;
+  border: 1px solid #fecaca;
+  border-radius: 999px;
+  background: #fef2f2;
+  color: #991b1b;
+}
+
+/* Preserve breathing room around card content on small phones. */
+@media (max-width: 480px) {
+  .foodcard {
+    padding: 14px;
+  }
 }

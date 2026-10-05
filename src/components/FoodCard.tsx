@@ -6,12 +6,20 @@ type FoodCardProps = {
 };
 
 export default function FoodCard({ item }: FoodCardProps) {
+  // Zero is a valid inventory value, but it should be shown as an availability status instead of a quantity.
+  const isOutOfStock = item.quantity === 0;
+
   return (
-    <div className={styles.foodcard}>
+    <article className={styles.foodcard}>
       <h2>{item.name}</h2>
       <p>Category: {item.category}</p>
-      <p>Quantity: {item.quantity}</p>
+      {/* Make unavailable items immediately understandable to visitors scanning the menu. */}
+      {isOutOfStock ? (
+        <p className={`${styles.availability} ${styles.outOfStock}`}>Out of stock</p>
+      ) : (
+        <p className={styles.availability}>Quantity: {item.quantity}</p>
+      )}
       <p>Best by: {item.expiration_date}</p>
-    </div>
+    </article>
   );
 }
