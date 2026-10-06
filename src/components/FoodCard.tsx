@@ -11,7 +11,7 @@ export default function FoodCard({ item }: FoodCardProps) {
       <h2>{item.name}</h2>
       <p>Category: {item.category}</p>
       <p>Quantity: {item.quantity}</p>
-      <p>Best by: {item.expiration_date}</p>
+      <p>Best by: {item.expiration_date.toLocaleDateString()}</p>
     </div>
   );
 }
