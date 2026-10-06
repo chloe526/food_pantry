@@ -19,7 +19,7 @@ export default function FoodCard({ item }: FoodCardProps) {
       ) : (
         <p className={styles.availability}>Quantity: {item.quantity}</p>
       )}
-      <p>Best by: {item.expiration_date}</p>
+      <p>Best by: {new Date(item.expiration_date).toLocaleDateString()}</p>
     </article>
   );
 }
