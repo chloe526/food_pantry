@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
-import Navbar from "../../components/Navbar";
+import styles from "./Wishlist.module.css";
 
 export default function WishlistPage() {
   const [items, setItems] = useState([
@@ -88,20 +88,37 @@ export default function WishlistPage() {
   }
 
   return (
-    <>
-      <main>
-        <h1>CalPoly Food Pantry Wishlist</h1>
-        <p>Request food items you would like the pantry to carry.</p>
+    <div className={styles.pageWrapper}>
+      <main className={styles.container}>
+        <div className={styles.headerSection}>
+          <h1 className={styles.title}>Wishlist</h1>
+          <p className={styles.subtitle}>Request food items you would like the pantry to carry.</p>
+          <hr className={styles.divider} />
+        </div>
 
-        <form onSubmit={addItem}>
-          <div>
-            <label htmlFor="foodName">Food name</label>
-            <input id="foodName" value={foodName} onChange={(event) => setFoodName(event.target.value)} />
+        <form onSubmit={addItem} className={styles.form}>
+          <div className={styles.fieldGroup}>
+            <label htmlFor="foodName" className={styles.label}>
+              FOOD NAME
+            </label>
+            <input
+              id="foodName"
+              value={foodName}
+              className={styles.textInput}
+              onChange={(event) => setFoodName(event.target.value)}
+            />
           </div>
 
-          <div>
-            <label htmlFor="category">Category</label>
-            <select id="category" value={category} onChange={(event) => setCategory(event.target.value)}>
+          <div className={styles.fieldGroup}>
+            <label htmlFor="category" className={styles.label}>
+              CATEGORY
+            </label>
+            <select
+              id="category"
+              value={category}
+              className={styles.selectInput}
+              onChange={(event) => setCategory(event.target.value)}
+            >
               <option value="">Select a category</option>
               <option value="Produce">Produce</option>
               <option value="Pantry Staples">Pantry Staples</option>
@@ -111,60 +128,77 @@ export default function WishlistPage() {
             </select>
           </div>
 
-          <div>
-            <label htmlFor="quantity">Requested quantity</label>
+          <div className={styles.fieldGroup}>
+            <label htmlFor="quantity" className={styles.label}>
+              REQUESTED QUANTITY
+            </label>
             <input
               id="quantity"
               type="number"
               min="1"
               value={quantity}
+              className={styles.textInput}
               onChange={(event) => setQuantity(event.target.value)}
             />
           </div>
 
           {error && <p>{error}</p>}
 
-          <button type="submit">Add request</button>
+          <div className={styles.buttonWrapper}>
+            <button type="submit" className={styles.submitButton}>
+              Submit Request
+            </button>
+          </div>
         </form>
 
-        <h2>Requested Items</h2>
+        <div className={styles.tableSection}>
+          <h2 className={styles.sectionTitle}>Requested Items:</h2>
 
-        {items.length === 0 ? (
-          <p>No wishlist requests yet.</p>
-        ) : (
-          <table>
-            <thead>
-              <tr>
-                <th>Item</th>
-                <th>Category</th>
-                <th>Quantity</th>
-                <th>Availability</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
+          {items.length === 0 ? (
+            <p className={styles.emptyMessage}>No wishlist requests yet.</p>
+          ) : (
+            <div className={styles.tableWrapper}>
+              <table className={styles.table}>
+                <thead>
+                  <tr>
+                    <th>ITEM</th>
+                    <th>CATEGORY</th>
+                    <th>QUANTITY</th>
+                    <th>AVAILABILITY</th>
+                    <th>ACTIONS</th>
+                  </tr>
+                </thead>
 
-            <tbody>
-              {items.map((item, index) => (
-                <tr key={index}>
-                  <td>{item.name}</td>
-                  <td>{item.category}</td>
-                  <td>{item.quantity}</td>
-                  <td>{item.available ? "Available" : "Unavailable"}</td>
-                  <td>
-                    <button type="button" onClick={() => changeAvailability(index)}>
-                      Change availability
-                    </button>
+                <tbody>
+                  {items.map((item, index) => (
+                    <tr key={index}>
+                      <td className={styles.itemName}>{item.name}</td>
+                      <td>
+                        <span className={styles.category}>{item.category}</span>
+                      </td>
+                      <td className={styles.quantityText}>{item.quantity}</td>
+                      <td>
+                        <span className={item.available ? styles.statusAvailable : styles.statusUnavailable}>
+                          {item.available ? "Available" : "Unavailable"}
+                        </span>
+                      </td>
+                      <td className={styles.actionButtons}>
+                        <button type="button" className={styles.toggleButton} onClick={() => changeAvailability(index)}>
+                          Change availability
+                        </button>
 
-                    <button type="button" onClick={() => removeItem(index)}>
-                      Remove
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        )}
+                        <button type="button" className={styles.removeButton} onClick={() => removeItem(index)}>
+                          Remove
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+        </div>
       </main>
-    </>
+    </div>
   );
 }

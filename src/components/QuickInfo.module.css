@@ -1,3 +1,11 @@
 .card h3 {
-  color: #154734;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #1b4332;
+}
+
+.card p {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: "#222222";
 }

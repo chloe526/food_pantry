@@ -7,16 +7,24 @@
   gap: 2rem;
   padding: 0.5rem;
   margin: 0;
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    sans-serif;
 }
 
-nav a.siteTitle {
+.siteTitle {
   font-size: 2rem;
-  color: #eeb948;
+  color: #eeb948 !important;
   font-weight: bold;
   padding: 0 1rem;
+  margin: 0.5rem;
 }
 
-.nav ul {
+.links {
   padding: 0;
   margin: 0;
   list-style: none;
@@ -32,12 +40,10 @@ nav a.siteTitle {
   display: flex;
   align-items: center;
   padding: 0rem;
+  transition: color 0.15s ease;
 }
 
-.nav li:active {
-  color: #eeb948;
-}
-
-.nav li:hover {
+.nav a:hover,
+.nav a.active {
   color: #eeb948;
 }

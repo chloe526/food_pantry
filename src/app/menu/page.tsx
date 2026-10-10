@@ -9,10 +9,19 @@ export default function MenuPage() {
   }
 
   return (
-    <main className={styles.menuGrid}>
-      {inventory.map((item) => (
-        <FoodCard key={item.id} item={item} />
-      ))}
-    </main>
+    <div className={styles.pageWrapper}>
+      <div className={styles.container}>
+        <div className={styles.header}>
+          <h1 className={styles.title}>Pantry Menu</h1>
+          <p className={styles.subtitle}>Current inventory—updated regularly.</p>
+          <hr className={styles.divider} />
+        </div>
+        <main className={styles.menuGrid}>
+          {inventory.map((item) => (
+            <FoodCard key={item.id} item={item} />
+          ))}
+        </main>
+      </div>
+    </div>
   );
 }

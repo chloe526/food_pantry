@@ -1,0 +1,94 @@
+.pageWrapper {
+  min-height: 100vh;
+  background-color: #fcfcfc;
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    sans-serif;
+  color: #111111;
+}
+
+.container {
+  max-width: 1250px;
+  margin: 0 50px;
+  padding: 40px 24px 80px;
+}
+
+.headerSection {
+  max-width: 580px;
+  margin-bottom: 32px;
+}
+
+.title {
+  color: #1b4332;
+  font-size: 2.2rem;
+  font-weight: 800;
+  margin: 0 0 12px 0;
+}
+
+.subtitle {
+  font-size: 0.95rem;
+  font-weight: 400;
+  color: #111111;
+  margin: 0 0 12px 0;
+}
+
+.divider {
+  border: none;
+  border-top: 2px solid #1b4332;
+  margin: 0;
+  width: 100%;
+}
+
+.form {
+  max-width: 580px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.fieldGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.label {
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: #111111;
+  letter-spacing: 0.03em;
+}
+
+.textInput,
+.textareaInput {
+  width: 100%;
+  border: 1px solid #b0b0b0;
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 1rem;
+  outline: none;
+  box-sizing: border-box;
+  background-color: #ffffff;
+  transition: border-color 0.2s;
+}
+
+.submitButton {
+  background-color: #1b4332;
+  color: #ffffff;
+  border: none;
+  padding: 10px 24px;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.buttonWrapper {
+  display: flex;
+  justify-content: flex-end;
+}
