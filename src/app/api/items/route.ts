@@ -1,8 +1,32 @@
 import { NextResponse } from "next/server";
+import connectDB from "@/database/db";
+import FoodItemModel from "@/database/foodSchema";
 import { inventory } from "../../../data/mockFoodItems";
 
+// Database-backed reads must run when the request arrives instead of using a cached route response.
+export const dynamic = "force-dynamic";
+
 export async function GET() {
-  return NextResponse.json(inventory, { status: 200 });
+  try {
+    // Connect on the server, then return only the fields the menu needs.
+    await connectDB();
+    const foodItems = await FoodItemModel.find({}).sort({ name: 1 }).lean();
+    const menuItems = foodItems.map((item) => ({
+      id: item.id,
+      name: item.name,
+      expiration_date: item.expiration_date.toISOString(),
+      category: item.category,
+      quantity: item.quantity,
+    }));
+
+    return NextResponse.json(menuItems, {
+      status: 200,
+      headers: { "Cache-Control": "no-store" },
+    });
+  } catch (error) {
+    console.error("Unable to load inventory from the database:", error);
+    return NextResponse.json({ error: "Unable to load inventory." }, { status: 500 });
+  }
 }
 
 export async function POST(request: Request) {
