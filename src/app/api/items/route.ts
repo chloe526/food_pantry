@@ -1,27 +1,33 @@
 import { NextResponse } from "next/server";
+import connectDB from "@/database/db";
+import FoodItemModel from "@/database/foodSchema";
 import { inventory } from "../../../data/mockFoodItems";
 import FoodItemModel from "@/database/foodSchema";
 import mongoose from "mongoose";
 
-let connection: typeof mongoose | undefined;
+// Database-backed reads must run when the request arrives instead of using a cached route response.
+export const dynamic = "force-dynamic";
 
-const createConnection = async () => {
-  connection = connection ?? (await mongoose.connect(process.env.MONGO_URI as string));
-  return connection;
-};
-
-//module.exports = createConnection;
-
-export async function GET(request: Request, { params }: { params: { category: string } }) {
-  //params isn't used currently but can be used later if we want the ability to search by category
+export async function GET() {
   try {
-    console.log("Mongo URI defined:", !!process.env.MONGO_URI);
-    await createConnection();
-    const pantry_inventory = await FoodItemModel.find({});
-    return NextResponse.json(pantry_inventory, { status: 200 });
+    // Connect on the server, then return only the fields the menu needs.
+    await connectDB();
+    const foodItems = await FoodItemModel.find({}).sort({ name: 1 }).lean();
+    const menuItems = foodItems.map((item) => ({
+      id: item.id,
+      name: item.name,
+      expiration_date: item.expiration_date.toISOString(),
+      category: item.category,
+      quantity: item.quantity,
+    }));
+
+    return NextResponse.json(menuItems, {
+      status: 200,
+      headers: { "Cache-Control": "no-store" },
+    });
   } catch (error) {
-    console.error(error);
-    return NextResponse.json({ error: "Failed to fetch inventory" }, { status: 500 });
+    console.error("Unable to load inventory from the database:", error);
+    return NextResponse.json({ error: "Unable to load inventory." }, { status: 500 });
   }
 }
 

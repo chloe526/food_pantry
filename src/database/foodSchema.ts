@@ -35,6 +35,7 @@ const FoodSchema = new Schema<FoodItem>(
   { timestamps: true },
 );
 
+// Match the cached model key to the registered model name so development reloads do not redefine it.
 const FoodItemModel = mongoose.models.Food || mongoose.model<FoodItem>("Food", FoodSchema);
 
 export default FoodItemModel;
