@@ -1,24 +1,36 @@
 .nav {
-  background-color: green;
+  background-color: #154734;
   color: white;
   display: flex;
   justify-content: space-between;
   align-items: stretch;
   gap: 2rem;
-  padding: 0 1rem;
+  padding: 0.5rem;
+  margin: 0;
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    sans-serif;
 }
 
-nav a.siteTitle {
+.siteTitle {
   font-size: 2rem;
-  color: yellow;
+  color: #eeb948 !important;
+  font-weight: bold;
+  padding: 0 1rem;
+  margin: 0.5rem;
 }
 
-.nav ul {
+.links {
   padding: 0;
   margin: 0;
   list-style: none;
   display: flex;
-  gap: 1rem;
+  gap: 3rem;
+  padding: 0 2rem;
 }
 
 .nav a {
@@ -27,13 +39,11 @@ nav a.siteTitle {
   height: 100%;
   display: flex;
   align-items: center;
-  padding: 0.25rem;
+  padding: 0rem;
+  transition: color 0.15s ease;
 }
 
-.nav li:active {
-  color: yellow;
-}
-
-.nav li:hover {
-  color: yellow;
+.nav a:hover,
+.nav a.active {
+  color: #eeb948;
 }
