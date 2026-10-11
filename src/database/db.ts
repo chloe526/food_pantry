@@ -10,9 +10,7 @@ connection = null as unknown as typeof mongoose; // Initialize connection to nul
  */
 const connectDB = async () => {
   if (!connection) {
-    // uncomment this line once you have the MONGO_URI set up
-    // connection = await mongoose.connect(url);
-    // connection = await mongoose.connect(url);
+    connection = await mongoose.connect(url);
     return connection;
   }
 };
