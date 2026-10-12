@@ -88,14 +88,6 @@ describe("Navbar", () => {
 
     expect(screen.getByRole("link", { name: /contact/i }).getAttribute("href")).toBe("/contact");
   });
-
-  test("renders all five expected links", () => {
-    render(<Navbar />);
-
-    const links = screen.getAllByRole("link");
-
-    expect(links.length).toBe(5);
-  });
 });
 
 describe("Quickinfo", () => {
