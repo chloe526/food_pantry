@@ -1,0 +1,146 @@
+.form {
+  --form-border: #c9ced6;
+  --form-focus: #2563eb;
+  --form-error: #b42318;
+  --form-success: #067647;
+  --form-muted: #5b6270;
+  --form-radius: 8px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem; /* consistent space between fields */
+  width: 100%;
+  max-width: 34rem; /* keeps lines a readable length on desktop */
+}
+
+/* One label + input + error message */
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+  min-width: 0; /* lets grid children shrink instead of overflowing */
+}
+
+/* Stacked on phones; two columns once there's room */
+.row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+@media (min-width: 600px) {
+  .row {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.label {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+/* Applies to input, select and textarea */
+.input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.65rem 0.75rem;
+  font: inherit;
+  font-size: 1rem; /* 16px+ stops iOS from zooming in on focus */
+  color: inherit;
+  background: transparent;
+  border: 1px solid var(--form-border);
+  border-radius: var(--form-radius);
+}
+
+.input:focus-visible {
+  outline: 2px solid var(--form-focus);
+  outline-offset: 1px;
+  border-color: var(--form-focus);
+}
+
+.input[aria-invalid="true"] {
+  border-color: var(--form-error);
+}
+
+textarea.input {
+  min-height: 8rem;
+  resize: vertical;
+}
+
+.error {
+  margin: 0;
+  color: var(--form-error);
+  font-size: 0.875rem;
+}
+
+.hint {
+  margin: 0;
+  color: var(--form-muted);
+  font-size: 0.875rem;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+}
+
+.button {
+  padding: 0.7rem 1.4rem;
+  min-height: 44px; /* comfortable tap target on phones */
+  font: inherit;
+  font-weight: 600;
+  color: #fff;
+  background: var(--form-focus);
+  border: none;
+  border-radius: var(--form-radius);
+  cursor: pointer;
+}
+
+.button:hover:not(:disabled) {
+  filter: brightness(0.92);
+}
+
+.button:focus-visible {
+  outline: 2px solid var(--form-focus);
+  outline-offset: 2px;
+}
+
+.button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Full-width button on small phones */
+@media (max-width: 420px) {
+  .button {
+    width: 100%;
+  }
+}
+
+.link {
+  color: var(--form-focus);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* Reserve a little space so messages don't make the page jump */
+.statusRegion {
+  min-height: 1.5rem;
+}
+
+.status {
+  margin: 0;
+  padding: 0.75rem 1rem;
+  border-radius: var(--form-radius);
+  border: 1px solid currentColor;
+}
+
+.success {
+  color: var(--form-success);
+}
+
+.failure {
+  color: var(--form-error);
+}
