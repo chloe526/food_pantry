@@ -2,8 +2,6 @@ import { NextResponse } from "next/server";
 import connectDB from "@/database/db";
 import FoodItemModel from "@/database/foodSchema";
 import { inventory } from "../../../data/mockFoodItems";
-import FoodItemModel from "@/database/foodSchema";
-import mongoose from "mongoose";
 
 // Database-backed reads must run when the request arrives instead of using a cached route response.
 export const dynamic = "force-dynamic";
@@ -60,7 +58,7 @@ export async function POST(request: Request) {
   }
 
   try {
-    await createConnection();
+    await connectDB();
     const newItem = await FoodItemModel.create({
       id: generateUniqueId(),
       name: item.name,
