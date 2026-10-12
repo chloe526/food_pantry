@@ -1,90 +1,102 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useEffect, useState, type FormEvent } from "react";
 import styles from "./Wishlist.module.css";
 
-export default function WishlistPage() {
-  const [items, setItems] = useState([
-    {
-      name: "Avocado",
-      category: "Produce",
-      quantity: 2,
-      available: true,
-    },
-    {
-      name: "Cooking Oil",
-      category: "Pantry Staples",
-      quantity: 3,
-      available: false,
-    },
-    {
-      name: "Beijing Beef",
-      category: "Meals",
-      quantity: 1,
-      available: false,
-    },
-  ]);
+type WishlistItem = {
+  _id: string;
+  name: string;
+  category: string;
+  quantity: number;
+};
 
+export default function WishlistPage() {
+  const [items, setItems] = useState<WishlistItem[]>([]);
   const [foodName, setFoodName] = useState("");
   const [category, setCategory] = useState("");
   const [quantity, setQuantity] = useState("");
-  const [error, setError] = useState("");
 
-  // just so it doesn't reload into a new page everytime form submits
-  function addItem(event: FormEvent<HTMLFormElement>) {
+  const [loading, setLoading] = useState(true);
+  const [saving, setSaving] = useState(false);
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+
+  useEffect(() => {
+    async function loadItems() {
+      try {
+        setLoading(true);
+        setError("");
+
+        const response = await fetch("/api/wishlist");
+
+        if (!response.ok) {
+          throw new Error("Could not load wishlist requests.");
+        }
+
+        const data = await response.json();
+        setItems(data);
+      } catch (error) {
+        setError(error instanceof Error ? error.message : "Could not load wishlist requests.");
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    loadItems();
+  }, []);
+
+  async function addItem(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    if (foodName === "" || category === "" || quantity === "") {
+    setError("");
+    setSuccess("");
+
+    const cleanFoodName = foodName.trim();
+    const cleanCategory = category.trim();
+    const requestedQuantity = Number(quantity);
+
+    if (!cleanFoodName || !cleanCategory || quantity === "") {
       setError("Please fill out every field.");
       return;
     }
 
-    if (Number(quantity) <= 0) {
-      setError("Quantity must be greater than 0.");
+    if (!Number.isInteger(requestedQuantity) || requestedQuantity <= 0) {
+      setError("Quantity must be a positive whole number.");
       return;
     }
 
-    const newItem = {
-      name: foodName,
-      category: category,
-      quantity: Number(quantity),
-      available: false,
-    };
-    // this is to check whether an inputted item already exists before adding it to the user's wishlist
-    const existingItemIndex = items.findIndex((item) => {
-      return item.name.toLowerCase() === foodName.toLowerCase();
-    });
+    try {
+      setSaving(true);
 
-    if (existingItemIndex !== -1) {
-      const updatedItems = [...items];
+      const response = await fetch("/api/wishlist", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: cleanFoodName,
+          category: cleanCategory,
+          quantity: requestedQuantity,
+        }),
+      });
 
-      updatedItems[existingItemIndex].quantity += Number(quantity);
+      const newItem = await response.json();
 
-      setItems(updatedItems);
-    } else {
-      setItems([...items, newItem]);
+      if (!response.ok) {
+        throw new Error(newItem.error || "Could not save wishlist request.");
+      }
+
+      setItems((currentItems) => [newItem, ...currentItems]);
+
+      setFoodName("");
+      setCategory("");
+      setQuantity("");
+      setSuccess("Your wishlist request was added.");
+    } catch (error) {
+      setError(error instanceof Error ? error.message : "Could not save wishlist request.");
+    } finally {
+      setSaving(false);
     }
-
-    setFoodName("");
-    setCategory("");
-    setQuantity("");
-    setError("");
-  }
-
-  function removeItem(index: number) {
-    const updatedItems = items.filter((item, itemIndex) => {
-      return itemIndex !== index;
-    });
-
-    setItems(updatedItems);
-  }
-
-  function changeAvailability(index: number) {
-    const updatedItems = [...items];
-
-    updatedItems[index].available = !updatedItems[index].available;
-
-    setItems(updatedItems);
   }
 
   return (
@@ -136,68 +148,50 @@ export default function WishlistPage() {
               id="quantity"
               type="number"
               min="1"
+              step="1"
               value={quantity}
               className={styles.textInput}
               onChange={(event) => setQuantity(event.target.value)}
             />
           </div>
 
-          {error && <p>{error}</p>}
+          {error && <p role="alert">{error}</p>}
+          {success && <p>{success}</p>}
 
-          <div className={styles.buttonWrapper}>
-            <button type="submit" className={styles.submitButton}>
-              Submit Request
-            </button>
-          </div>
+          <button type="submit" disabled={saving}>
+            {saving ? "Saving..." : "Add request"}
+          </button>
         </form>
 
-        <div className={styles.tableSection}>
-          <h2 className={styles.sectionTitle}>Requested Items:</h2>
+        <h2>Requested Items</h2>
 
-          {items.length === 0 ? (
-            <p className={styles.emptyMessage}>No wishlist requests yet.</p>
-          ) : (
-            <div className={styles.tableWrapper}>
-              <table className={styles.table}>
-                <thead>
-                  <tr>
-                    <th>ITEM</th>
-                    <th>CATEGORY</th>
-                    <th>QUANTITY</th>
-                    <th>AVAILABILITY</th>
-                    <th>ACTIONS</th>
+        {loading ? (
+          <p>Loading wishlist requests...</p>
+        ) : items.length === 0 ? (
+          <p>No wishlist requests yet.</p>
+        ) : (
+          <div className="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>Item</th>
+                  <th>Category</th>
+                  <th>Quantity</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                {items.map((item) => (
+                  <tr key={item._id}>
+                    <td>{item.name}</td>
+                    <td>{item.category}</td>
+                    <td>{item.quantity}</td>
                   </tr>
-                </thead>
-
-                <tbody>
-                  {items.map((item, index) => (
-                    <tr key={index}>
-                      <td className={styles.itemName}>{item.name}</td>
-                      <td>
-                        <span className={styles.category}>{item.category}</span>
-                      </td>
-                      <td className={styles.quantityText}>{item.quantity}</td>
-                      <td>
-                        <span className={item.available ? styles.statusAvailable : styles.statusUnavailable}>
-                          {item.available ? "Available" : "Unavailable"}
-                        </span>
-                      </td>
-                      <td className={styles.actionButtons}>
-                        <button type="button" className={styles.toggleButton} onClick={() => changeAvailability(index)}>
-                          Change availability
-                        </button>
-
-                        <button type="button" className={styles.removeButton} onClick={() => removeItem(index)}>
-                          Remove
-                        </button>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          )}
-        </div>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
       </main>
     </div>
   );
