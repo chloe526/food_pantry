@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useState, type FormEvent } from "react";
-import Navbar from "../../components/Navbar";
+import { useState, type FormEvent } from "react";
+import styles from "./Wishlist.module.css";
 
 type WishlistItem = {
   _id: string;
@@ -100,20 +100,37 @@ export default function WishlistPage() {
   }
 
   return (
-    <>
-      <main>
-        <h1>CalPoly Food Pantry Wishlist</h1>
-        <p>Request food items you would like the pantry to carry.</p>
+    <div className={styles.pageWrapper}>
+      <main className={styles.container}>
+        <div className={styles.headerSection}>
+          <h1 className={styles.title}>Wishlist</h1>
+          <p className={styles.subtitle}>Request food items you would like the pantry to carry.</p>
+          <hr className={styles.divider} />
+        </div>
 
-        <form onSubmit={addItem}>
-          <div>
-            <label htmlFor="foodName">Food name</label>
-            <input id="foodName" value={foodName} onChange={(event) => setFoodName(event.target.value)} />
+        <form onSubmit={addItem} className={styles.form}>
+          <div className={styles.fieldGroup}>
+            <label htmlFor="foodName" className={styles.label}>
+              FOOD NAME
+            </label>
+            <input
+              id="foodName"
+              value={foodName}
+              className={styles.textInput}
+              onChange={(event) => setFoodName(event.target.value)}
+            />
           </div>
 
-          <div>
-            <label htmlFor="category">Category</label>
-            <select id="category" value={category} onChange={(event) => setCategory(event.target.value)}>
+          <div className={styles.fieldGroup}>
+            <label htmlFor="category" className={styles.label}>
+              CATEGORY
+            </label>
+            <select
+              id="category"
+              value={category}
+              className={styles.selectInput}
+              onChange={(event) => setCategory(event.target.value)}
+            >
               <option value="">Select a category</option>
               <option value="Produce">Produce</option>
               <option value="Pantry Staples">Pantry Staples</option>
@@ -123,14 +140,17 @@ export default function WishlistPage() {
             </select>
           </div>
 
-          <div>
-            <label htmlFor="quantity">Requested quantity</label>
+          <div className={styles.fieldGroup}>
+            <label htmlFor="quantity" className={styles.label}>
+              REQUESTED QUANTITY
+            </label>
             <input
               id="quantity"
               type="number"
               min="1"
               step="1"
               value={quantity}
+              className={styles.textInput}
               onChange={(event) => setQuantity(event.target.value)}
             />
           </div>
@@ -173,6 +193,6 @@ export default function WishlistPage() {
           </div>
         )}
       </main>
-    </>
+    </div>
   );
 }
