@@ -16,7 +16,7 @@ export default function Home() {
             <QuickInfo primary="2,400+" secondary="Students served" />
             <QuickInfo primary="12,000 lbs" secondary="Food distributed" />
             <QuickInfo primary="Free" secondary="Always, no proof needed" />
-            <QuickInfo primary="Mon-Fri" secondary="10am-4pm" />
+            <QuickInfo primary="Mon-Fri" secondary="8:30am-6pm" />
           </div>
         </div>
         <div className={style.cards}>
