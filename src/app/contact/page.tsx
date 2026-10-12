@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import formStyles from "@/components/Form.module.css";
-import styles from "./Contact.module.css";
+import styles from "./contact.module.css";
 
 export default function Contact() {
   const [sent, setSent] = useState(false);
