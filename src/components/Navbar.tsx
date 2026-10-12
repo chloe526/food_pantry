@@ -12,6 +12,7 @@ export default function Navbar() {
     { href: "/about", label: "About" },
     { href: "/menu", label: "Menu" },
     { href: "/wishlist", label: "Wishlist" },
+    { href: "/manage", label: "Manage" },
     { href: "/contact", label: "Contact" },
   ];
 
