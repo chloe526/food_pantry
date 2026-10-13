@@ -12,14 +12,23 @@
 }
 
 .container {
-  max-width: 960px;
+  max-width: 1500px;
   margin: 0 50px;
   padding: 40px 24px 80px;
+  box-sizing: border-box;
 }
 
 .headerSection {
-  max-width: 480px;
+  max-width: none;
+  width: calc((100% - 40px) * 0.32);
   margin-bottom: 32px;
+}
+
+.divider {
+  border: none;
+  border-top: 2px solid #1b4332;
+  margin: 0;
+  width: 100%;
 }
 
 .title {
@@ -36,19 +45,23 @@
   margin: 0 0 12px 0;
 }
 
-.divider {
-  border: none;
-  border-top: 2px solid #1b4332;
-  margin: 0;
-  width: 100%;
+/* Side-by-side layout for the form and table */
+.wishlistLayout {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.7fr);
+  gap: 40px;
+  align-items: start;
 }
 
+/* Request form */
 .form {
-  max-width: 480px;
+  width: 100%;
+  max-width: none;
   display: flex;
   flex-direction: column;
   gap: 20px;
-  margin-bottom: 56px;
+  margin-bottom: 0;
+  min-width: 0;
 }
 
 .fieldGroup {
@@ -77,6 +90,11 @@
   transition: border-color 0.2s;
 }
 
+.textInput:focus,
+.selectInput:focus {
+  border-color: #1b4332;
+}
+
 .buttonWrapper {
   display: flex;
   justify-content: flex-end;
@@ -92,15 +110,35 @@
   font-weight: 600;
   cursor: pointer;
   transition: opacity 0.2s;
+  width: 100%;
 }
 
-.buttonWrapper {
-  display: flex;
-  justify-content: flex-end;
+.submitButton:hover {
+  opacity: 0.9;
 }
 
+.submitButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Error and success messages */
+.errorMessage {
+  color: #b42318;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.successMessage {
+  color: #1b4332;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+/* Requested items section */
 .tableSection {
   width: 100%;
+  min-width: 0;
 }
 
 .sectionTitle {
@@ -168,4 +206,31 @@
   font-weight: 500;
   padding: 4px 12px;
   border-radius: 6px;
+  white-space: nowrap;
+}
+
+/* Responsive layout for tablets and phones */
+@media (max-width: 800px) {
+  .container {
+    margin: 0;
+    padding: 24px 20px 48px;
+  }
+
+  .headerSection {
+    margin-bottom: 28px;
+  }
+
+  .wishlistLayout {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 40px;
+  }
+
+  .sectionTitle {
+    font-size: 1.4rem;
+  }
+
+  .table th,
+  .table td {
+    padding: 12px;
+  }
 }

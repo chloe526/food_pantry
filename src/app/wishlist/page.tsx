@@ -102,98 +102,123 @@ export default function WishlistPage() {
   return (
     <div className={styles.pageWrapper}>
       <main className={styles.container}>
+        {/* Page heading */}
         <div className={styles.headerSection}>
           <h1 className={styles.title}>Wishlist</h1>
+
           <p className={styles.subtitle}>Request food items you would like the pantry to carry.</p>
+
           <hr className={styles.divider} />
         </div>
 
-        <form onSubmit={addItem} className={styles.form}>
-          <div className={styles.fieldGroup}>
-            <label htmlFor="foodName" className={styles.label}>
-              FOOD NAME
-            </label>
-            <input
-              id="foodName"
-              value={foodName}
-              className={styles.textInput}
-              onChange={(event) => setFoodName(event.target.value)}
-            />
-          </div>
+        {/* Two-column layout */}
+        <div className={styles.wishlistLayout}>
+          {/* LEFT SIDE: Request form */}
+          <form onSubmit={addItem} className={styles.form}>
+            <div className={styles.fieldGroup}>
+              <label htmlFor="foodName" className={styles.label}>
+                FOOD NAME
+              </label>
 
-          <div className={styles.fieldGroup}>
-            <label htmlFor="category" className={styles.label}>
-              CATEGORY
-            </label>
-            <select
-              id="category"
-              value={category}
-              className={styles.selectInput}
-              onChange={(event) => setCategory(event.target.value)}
-            >
-              <option value="">Select a category</option>
-              <option value="Produce">Produce</option>
-              <option value="Pantry Staples">Pantry Staples</option>
-              <option value="Meals">Meals</option>
-              <option value="Snacks">Snacks</option>
-              <option value="Other">Other</option>
-            </select>
-          </div>
+              <input
+                id="foodName"
+                type="text"
+                value={foodName}
+                className={styles.textInput}
+                onChange={(event) => setFoodName(event.target.value)}
+              />
+            </div>
 
-          <div className={styles.fieldGroup}>
-            <label htmlFor="quantity" className={styles.label}>
-              REQUESTED QUANTITY
-            </label>
-            <input
-              id="quantity"
-              type="number"
-              min="1"
-              step="1"
-              value={quantity}
-              className={styles.textInput}
-              onChange={(event) => setQuantity(event.target.value)}
-            />
-          </div>
+            <div className={styles.fieldGroup}>
+              <label htmlFor="category" className={styles.label}>
+                CATEGORY
+              </label>
 
-          {error && <p role="alert">{error}</p>}
-          {success && <p>{success}</p>}
+              <select
+                id="category"
+                value={category}
+                className={styles.selectInput}
+                onChange={(event) => setCategory(event.target.value)}
+              >
+                <option value="">Select a category</option>
+                <option value="Produce">Produce</option>
+                <option value="Pantry Staples">Pantry Staples</option>
+                <option value="Meals">Meals</option>
+                <option value="Snacks">Snacks</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
 
-          <button type="submit" disabled={saving} className={styles.submitButton}>
-            {saving ? "Saving..." : "Add Request"}
-          </button>
-        </form>
+            <div className={styles.fieldGroup}>
+              <label htmlFor="quantity" className={styles.label}>
+                REQUESTED QUANTITY
+              </label>
 
-        <h2 className={styles.sectionTitle}>Requested Items</h2>
+              <input
+                id="quantity"
+                type="number"
+                min="1"
+                step="1"
+                value={quantity}
+                className={styles.textInput}
+                onChange={(event) => setQuantity(event.target.value)}
+              />
+            </div>
 
-        {loading ? (
-          <p>Loading wishlist requests...</p>
-        ) : items.length === 0 ? (
-          <p>No wishlist requests yet.</p>
-        ) : (
-          <div className={styles.tableWrapper}>
-            <table className={styles.table}>
-              <thead>
-                <tr>
-                  <th>ITEM</th>
-                  <th>CATEGORY</th>
-                  <th>QUANTITY</th>
-                </tr>
-              </thead>
+            {error && (
+              <p className={styles.errorMessage} role="alert">
+                {error}
+              </p>
+            )}
 
-              <tbody>
-                {items.map((item) => (
-                  <tr key={item._id}>
-                    <td>{item.name}</td>
-                    <td>
-                      <span className={styles.category}>{item.category}</span>
-                    </td>
-                    <td>{item.quantity}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        )}
+            {success && (
+              <p className={styles.successMessage} role="status">
+                {success}
+              </p>
+            )}
+
+            <button type="submit" disabled={saving} className={styles.submitButton}>
+              {saving ? "Saving..." : "Add Request"}
+            </button>
+          </form>
+
+          {/* RIGHT SIDE: Requested items */}
+          <section className={styles.tableSection}>
+            <h2 className={styles.sectionTitle}>Requested Items:</h2>
+
+            {loading ? (
+              <p className={styles.emptyMessage}>Loading wishlist requests...</p>
+            ) : items.length === 0 ? (
+              <p className={styles.emptyMessage}>No wishlist requests yet.</p>
+            ) : (
+              <div className={styles.tableWrapper}>
+                <table className={styles.table}>
+                  <thead>
+                    <tr>
+                      <th>ITEM</th>
+                      <th>CATEGORY</th>
+                      <th>QUANTITY</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    {items.map((item) => (
+                      <tr key={item._id}>
+                        <td className={styles.itemName}>{item.name}</td>
+
+                        <td>
+                          <span className={styles.category}>{item.category}</span>
+                        </td>
+
+                        <td className={styles.quantityText}>{item.quantity}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
+          </section>
+        </div>
       </main>
     </div>
   );
