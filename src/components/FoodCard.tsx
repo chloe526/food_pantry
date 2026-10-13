@@ -12,8 +12,10 @@ export default function FoodCard({ item }: FoodCardProps) {
   return (
     <article className={styles.foodcard}>
       <h2>{item.name}</h2>
-      <p>Category: {item.category}</p>
-      {/* Make unavailable items immediately understandable to visitors scanning the menu. */}
+      <div className={styles.categoryWrapper}>
+        <span className={styles.category}>{item.category}</span>
+      </div>
+      <hr className={styles.cardDivider} />
       {isOutOfStock ? (
         <p className={`${styles.availability} ${styles.outOfStock}`}>Out of stock</p>
       ) : (

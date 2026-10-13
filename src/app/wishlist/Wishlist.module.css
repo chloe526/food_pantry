@@ -12,14 +12,22 @@
 }
 
 .container {
-  max-width: 960px;
+  max-width: 1500px;
   margin: 0 50px;
   padding: 40px 24px 80px;
+  box-sizing: border-box;
 }
 
 .headerSection {
-  max-width: 480px;
+  max-width: none;
   margin-bottom: 32px;
+}
+
+.divider {
+  border: none;
+  border-top: 2px solid #1b4332;
+  margin: 0;
+  width: 100%;
 }
 
 .title {
@@ -36,19 +44,21 @@
   margin: 0 0 12px 0;
 }
 
-.divider {
-  border: none;
-  border-top: 2px solid #1b4332;
-  margin: 0;
-  width: 100%;
+.wishlistLayout {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.7fr);
+  gap: 40px;
+  align-items: start;
 }
 
 .form {
-  max-width: 480px;
+  width: 100%;
+  max-width: none;
   display: flex;
   flex-direction: column;
   gap: 20px;
-  margin-bottom: 56px;
+  margin-bottom: 0;
+  min-width: 0;
 }
 
 .fieldGroup {
@@ -77,6 +87,11 @@
   transition: border-color 0.2s;
 }
 
+.textInput:focus,
+.selectInput:focus {
+  border-color: #1b4332;
+}
+
 .buttonWrapper {
   display: flex;
   justify-content: flex-end;
@@ -92,15 +107,33 @@
   font-weight: 600;
   cursor: pointer;
   transition: opacity 0.2s;
+  width: 100%;
 }
 
-.buttonWrapper {
-  display: flex;
-  justify-content: flex-end;
+.submitButton:hover {
+  opacity: 0.9;
+}
+
+.submitButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.errorMessage {
+  color: #b42318;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.successMessage {
+  color: #1b4332;
+  font-size: 0.9rem;
+  margin: 0;
 }
 
 .tableSection {
   width: 100%;
+  min-width: 0;
 }
 
 .sectionTitle {
@@ -168,49 +201,30 @@
   font-weight: 500;
   padding: 4px 12px;
   border-radius: 6px;
+  white-space: nowrap;
 }
 
-.statusAvailable {
-  display: inline-block;
-  background-color: #d4edda;
-  color: #155724;
-  font-size: 0.8rem;
-  font-weight: 500;
-  padding: 4px 12px;
-  border-radius: 6px;
-}
+@media (max-width: 800px) {
+  .container {
+    margin: 0;
+    padding: 24px 20px 48px;
+  }
 
-.statusUnavailable {
-  display: inline-block;
-  background-color: #e2e3e5;
-  color: #383d41;
-  font-size: 0.8rem;
-  font-weight: 500;
-  padding: 4px 12px;
-  border-radius: 6px;
-}
+  .headerSection {
+    margin-bottom: 28px;
+  }
 
-.actionButtons {
-  display: flex;
-  gap: 8px;
-}
+  .wishlistLayout {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 40px;
+  }
 
-.toggleButton {
-  background-color: transparent;
-  border: 1px solid #1b4332;
-  color: #1b4332;
-  padding: 6px 12px;
-  border-radius: 6px;
-  font-size: 0.8rem;
-  font-weight: 500;
-}
+  .sectionTitle {
+    font-size: 1.4rem;
+  }
 
-.removeButton {
-  background-color: transparent;
-  border: 1px solid #c92a2a;
-  color: #c92a2a;
-  padding: 6px 12px;
-  border-radius: 6px;
-  font-size: 0.8rem;
-  font-weight: 500;
+  .table th,
+  .table td {
+    padding: 12px;
+  }
 }

@@ -148,7 +148,7 @@ export default function AddFoodForm() {
       {/* Name */}
       <div className={styles.field}>
         <label htmlFor="name" className={styles.label}>
-          Food name
+          FOOD NAME
         </label>
         <input
           id="name"
@@ -171,7 +171,7 @@ export default function AddFoodForm() {
       {/* Category */}
       <div className={styles.field}>
         <label htmlFor="category" className={styles.label}>
-          Category
+          CATEGORY
         </label>
         <select
           id="category"
@@ -200,7 +200,7 @@ export default function AddFoodForm() {
       <div className={styles.row}>
         <div className={styles.field}>
           <label htmlFor="quantity" className={styles.label}>
-            Quantity
+            QUANTITY
           </label>
           <input
             id="quantity"
@@ -224,7 +224,7 @@ export default function AddFoodForm() {
 
         <div className={styles.field}>
           <label htmlFor="expiration_date" className={styles.label}>
-            Expiration date
+            EXPIRATION DATE
           </label>
           <input
             id="expiration_date"
@@ -246,10 +246,10 @@ export default function AddFoodForm() {
 
       <div className={styles.actions}>
         <button type="submit" className={styles.button} disabled={isSaving}>
-          {isSaving ? "Saving…" : "Add food"}
+          {isSaving ? "Saving…" : "Add Food"}
         </button>
         <Link href="/menu" className={styles.link}>
-          View inventory on Menu
+          View Inventory on Menu
         </Link>
       </div>
 

@@ -17,13 +17,16 @@ export default function Contact() {
 
   return (
     <main className={styles.page}>
-      <h1 className={styles.title}>Contact Us</h1>
-      <p className={styles.intro}>Questions or feedback? Send us a message.</p>
+      <div className={styles.headerSection}>
+        <h1 className={styles.title}>Contact Us</h1>
+        <p className={styles.subtitle}>Questions, feedback, or want to volunteer? We would love to hear from you.</p>
+        <hr className={styles.divider} />
+      </div>
       <form id="contact-form" className={formStyles.form} onSubmit={handleSubmit}>
         <div className={formStyles.row}>
           <div className={formStyles.field}>
             <label htmlFor="name" className={formStyles.label}>
-              Name
+              NAME
             </label>
             <input
               type="text"
@@ -38,7 +41,7 @@ export default function Contact() {
 
           <div className={formStyles.field}>
             <label htmlFor="email" className={formStyles.label}>
-              Email
+              EMAIL
             </label>
             <input
               type="email"
@@ -54,14 +57,14 @@ export default function Contact() {
 
         <div className={formStyles.field}>
           <label htmlFor="message" className={formStyles.label}>
-            Message
+            MESSAGE
           </label>
           <textarea id="message" name="message" required className={formStyles.input} onChange={() => setSent(false)} />
         </div>
 
-        <div className={formStyles.actions}>
-          <button type="submit" className={formStyles.button}>
-            Send message
+        <div className={styles.buttonWrapper}>
+          <button type="submit" className={styles.submitButton}>
+            Send Message
           </button>
         </div>
 

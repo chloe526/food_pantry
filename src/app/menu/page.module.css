@@ -43,6 +43,13 @@
   width: 100%;
 }
 
+.label {
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: #111111;
+  letter-spacing: 0.03em;
+}
+
 /* Keep controls, messages, and cards centered with comfortable space at every screen size. */
 .menu {
   display: flex;
@@ -141,7 +148,7 @@
 /* A responsive grid prevents cards from becoming too narrow on either desktop or mobile. */
 .menuGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+  grid-template-columns: repeat(4, 1fr);
   gap: 16px;
 }
 
