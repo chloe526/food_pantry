@@ -158,25 +158,25 @@ export default function WishlistPage() {
           {error && <p role="alert">{error}</p>}
           {success && <p>{success}</p>}
 
-          <button type="submit" disabled={saving}>
-            {saving ? "Saving..." : "Add request"}
+          <button type="submit" disabled={saving} className={styles.submitButton}>
+            {saving ? "Saving..." : "Add Request"}
           </button>
         </form>
 
-        <h2>Requested Items</h2>
+        <h2 className={styles.sectionTitle}>Requested Items</h2>
 
         {loading ? (
           <p>Loading wishlist requests...</p>
         ) : items.length === 0 ? (
           <p>No wishlist requests yet.</p>
         ) : (
-          <div className="table-wrapper">
-            <table>
+          <div className={styles.tableWrapper}>
+            <table className={styles.table}>
               <thead>
                 <tr>
-                  <th>Item</th>
-                  <th>Category</th>
-                  <th>Quantity</th>
+                  <th>ITEM</th>
+                  <th>CATEGORY</th>
+                  <th>QUANTITY</th>
                 </tr>
               </thead>
 
@@ -184,7 +184,9 @@ export default function WishlistPage() {
                 {items.map((item) => (
                   <tr key={item._id}>
                     <td>{item.name}</td>
-                    <td>{item.category}</td>
+                    <td>
+                      <span className={styles.category}>{item.category}</span>
+                    </td>
                     <td>{item.quantity}</td>
                   </tr>
                 ))}
