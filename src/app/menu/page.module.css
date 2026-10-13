@@ -148,7 +148,7 @@
 /* A responsive grid prevents cards from becoming too narrow on either desktop or mobile. */
 .menuGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+  grid-template-columns: repeat(4, 1fr);
   gap: 16px;
 }
 
