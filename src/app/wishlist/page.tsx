@@ -184,8 +184,6 @@ export default function WishlistPage() {
 
           {/* RIGHT SIDE: Requested items */}
           <section className={styles.tableSection}>
-            <h2 className={styles.sectionTitle}>Requested Items:</h2>
-
             {loading ? (
               <p className={styles.emptyMessage}>Loading wishlist requests...</p>
             ) : items.length === 0 ? (
@@ -195,7 +193,7 @@ export default function WishlistPage() {
                 <table className={styles.table}>
                   <thead>
                     <tr>
-                      <th>ITEM</th>
+                      <th>REQUESTED ITEM</th>
                       <th>CATEGORY</th>
                       <th>QUANTITY</th>
                     </tr>
