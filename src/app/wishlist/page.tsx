@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, type FormEvent } from "react";
+import React, { useCallback, useEffect, useState, type FormEvent } from "react";
 import styles from "./Wishlist.module.css";
 
 type WishlistItem = {
@@ -18,37 +18,38 @@ export default function WishlistPage() {
 
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
-  const [error, setError] = useState("");
+  const [loadError, setLoadError] = useState("");
+  const [submitError, setSubmitError] = useState("");
   const [success, setSuccess] = useState("");
 
-  useEffect(() => {
-    async function loadItems() {
-      try {
-        setLoading(true);
-        setError("");
+  const loadItems = useCallback(async () => {
+    try {
+      setLoading(true);
+      setLoadError("");
 
-        const response = await fetch("/api/wishlist");
+      const response = await fetch("/api/wishlist");
 
-        if (!response.ok) {
-          throw new Error("Could not load wishlist requests.");
-        }
-
-        const data = await response.json();
-        setItems(data);
-      } catch (error) {
-        setError(error instanceof Error ? error.message : "Could not load wishlist requests.");
-      } finally {
-        setLoading(false);
+      if (!response.ok) {
+        throw new Error("Could not load wishlist requests.");
       }
-    }
 
-    loadItems();
+      const data = await response.json();
+      setItems(data);
+    } catch (error) {
+      setLoadError(error instanceof Error ? error.message : "Could not load wishlist requests.");
+    } finally {
+      setLoading(false);
+    }
   }, []);
+
+  useEffect(() => {
+    void loadItems();
+  }, [loadItems]);
 
   async function addItem(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    setError("");
+    setSubmitError("");
     setSuccess("");
 
     const cleanFoodName = foodName.trim();
@@ -56,12 +57,12 @@ export default function WishlistPage() {
     const requestedQuantity = Number(quantity);
 
     if (!cleanFoodName || !cleanCategory || quantity === "") {
-      setError("Please fill out every field.");
+      setSubmitError("Please fill out every field.");
       return;
     }
 
     if (!Number.isInteger(requestedQuantity) || requestedQuantity <= 0) {
-      setError("Quantity must be a positive whole number.");
+      setSubmitError("Quantity must be a positive whole number.");
       return;
     }
 
@@ -93,7 +94,7 @@ export default function WishlistPage() {
       setQuantity("");
       setSuccess("Your wishlist request was added.");
     } catch (error) {
-      setError(error instanceof Error ? error.message : "Could not save wishlist request.");
+      setSubmitError(error instanceof Error ? error.message : "Could not save wishlist request.");
     } finally {
       setSaving(false);
     }
@@ -155,7 +156,7 @@ export default function WishlistPage() {
             />
           </div>
 
-          {error && <p role="alert">{error}</p>}
+          {submitError && <p role="alert">{submitError}</p>}
           {success && <p>{success}</p>}
 
           <button type="submit" disabled={saving}>
@@ -165,7 +166,14 @@ export default function WishlistPage() {
 
         <h2>Requested Items</h2>
 
-        {loading ? (
+        {loadError ? (
+          <div role="alert">
+            <p>{loadError}</p>
+            <button type="button" onClick={() => void loadItems()}>
+              Retry
+            </button>
+          </div>
+        ) : loading ? (
           <p>Loading wishlist requests...</p>
         ) : items.length === 0 ? (
           <p>No wishlist requests yet.</p>
