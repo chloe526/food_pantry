@@ -102,7 +102,6 @@ export default function WishlistPage() {
   return (
     <div className={styles.pageWrapper}>
       <main className={styles.container}>
-        {/* Page heading */}
         <div className={styles.headerSection}>
           <h1 className={styles.title}>Wishlist</h1>
 
@@ -111,9 +110,7 @@ export default function WishlistPage() {
           <hr className={styles.divider} />
         </div>
 
-        {/* Two-column layout */}
         <div className={styles.wishlistLayout}>
-          {/* LEFT SIDE: Request form */}
           <form onSubmit={addItem} className={styles.form}>
             <div className={styles.fieldGroup}>
               <label htmlFor="foodName" className={styles.label}>
@@ -182,7 +179,6 @@ export default function WishlistPage() {
             </button>
           </form>
 
-          {/* RIGHT SIDE: Requested items */}
           <section className={styles.tableSection}>
             {loading ? (
               <p className={styles.emptyMessage}>Loading wishlist requests...</p>
