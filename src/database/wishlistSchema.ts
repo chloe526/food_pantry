@@ -18,7 +18,7 @@ const WishlistSchema = new Schema<WishlistItem>(
     quantity: {
       type: Number,
       required: [true, "Quantity is required"],
-      min: [0, "Desired quantity cannot be negative"],
+      min: [1, "Desired quantity cannot be negative"],
     },
   },
   { timestamps: true },
