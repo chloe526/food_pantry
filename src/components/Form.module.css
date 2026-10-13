@@ -1,6 +1,6 @@
 .form {
   --form-border: #c9ced6;
-  --form-focus: #2563eb;
+  --form-focus: #1b4332;
   --form-error: #b42318;
   --form-success: #067647;
   --form-muted: #5b6270;
@@ -53,8 +53,6 @@
 }
 
 .input:focus-visible {
-  outline: 2px solid var(--form-focus);
-  outline-offset: 1px;
   border-color: var(--form-focus);
 }
 
@@ -96,10 +94,6 @@ textarea.input {
   border: none;
   border-radius: var(--form-radius);
   cursor: pointer;
-}
-
-.button:hover:not(:disabled) {
-  filter: brightness(0.92);
 }
 
 .button:focus-visible {
