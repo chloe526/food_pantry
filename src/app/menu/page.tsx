@@ -80,77 +80,87 @@ export default function MenuPage() {
   }
 
   return (
-    <main className={styles.menu} aria-busy={isLoading}>
-      <h1 className={styles.pageTitle}>Pantry Menu</h1>
+    <div className={styles.pageWrapper}>
+      <main className={styles.menu} aria-busy={isLoading}>
+        <div className={styles.headerSection}>
+          <h1 className={styles.title}>Menu</h1>
+          <p className={styles.subtitle}>In stock items—updated regularly.</p>
+          <hr className={styles.divider} />
+        </div>
 
-      {/* Render each data state independently so visitors receive a clear explanation of what is happening. */}
-      {isLoading ? (
-        <p className={styles.statusMessage} role="status">
-          Loading pantry inventory...
-        </p>
-      ) : error ? (
-        <section className={`${styles.statusMessage} ${styles.errorState}`} role="alert">
-          <p>{error}</p>
-          <button className={styles.actionButton} type="button" onClick={retryLoadingInventory}>
-            Try again
-          </button>
-        </section>
-      ) : items.length === 0 ? (
-        <p className={styles.statusMessage} role="status">
-          The food pantry is currently out of stock.
-        </p>
-      ) : (
-        <>
-          {/* Filters appear only once there is inventory available to search. */}
-          <section className={styles.filters} aria-label="Filter pantry inventory">
-            <div className={styles.filterGroup}>
-              <label htmlFor="food-name-search">Search by name</label>
-              <input
-                id="food-name-search"
-                type="search"
-                value={searchQuery}
-                onChange={(event) => setSearchQuery(event.target.value)}
-                placeholder="Search food items"
-              />
-            </div>
-
-            <div className={styles.filterGroup}>
-              <label htmlFor="food-category-filter">Category</label>
-              <select
-                id="food-category-filter"
-                value={selectedCategory}
-                onChange={(event) => setSelectedCategory(event.target.value)}
-              >
-                <option value="all">All categories</option>
-                {categories.map((category) => (
-                  <option key={category} value={category}>
-                    {category}
-                  </option>
-                ))}
-              </select>
-            </div>
-          </section>
-
-          <p className={styles.resultCount} aria-live="polite">
-            {filteredItems.length} item{filteredItems.length === 1 ? "" : "s"} found
+        {/* Render each data state independently so visitors receive a clear explanation of what is happening. */}
+        {isLoading ? (
+          <p className={styles.statusMessage} role="status">
+            Loading pantry inventory...
           </p>
+        ) : error ? (
+          <section className={`${styles.statusMessage} ${styles.errorState}`} role="alert">
+            <p>{error}</p>
+            <button className={styles.actionButton} type="button" onClick={retryLoadingInventory}>
+              Try again
+            </button>
+          </section>
+        ) : items.length === 0 ? (
+          <p className={styles.statusMessage} role="status">
+            The food pantry is currently out of stock.
+          </p>
+        ) : (
+          <>
+            {/* Filters appear only once there is inventory available to search. */}
+            <section className={styles.filters} aria-label="Filter pantry inventory">
+              <div className={styles.filterGroup}>
+                <label htmlFor="food-name-search" className={styles.label}>
+                  SEARCH
+                </label>
+                <input
+                  id="food-name-search"
+                  type="search"
+                  value={searchQuery}
+                  onChange={(event) => setSearchQuery(event.target.value)}
+                  placeholder="Search food items"
+                />
+              </div>
 
-          {filteredItems.length === 0 ? (
-            <section className={styles.noResults} role="status">
-              <p>No pantry items match your search or category filter.</p>
-              <button className={styles.actionButton} type="button" onClick={clearFilters}>
-                Clear filters
-              </button>
+              <div className={styles.filterGroup}>
+                <label htmlFor="food-category-filter" className={styles.label}>
+                  CATEGORY
+                </label>
+                <select
+                  id="food-category-filter"
+                  value={selectedCategory}
+                  onChange={(event) => setSelectedCategory(event.target.value)}
+                >
+                  <option value="all">All categories</option>
+                  {categories.map((category) => (
+                    <option key={category} value={category}>
+                      {category}
+                    </option>
+                  ))}
+                </select>
+              </div>
             </section>
-          ) : (
-            <section className={styles.menuGrid} aria-label="Available food items">
-              {filteredItems.map((item) => (
-                <FoodCard key={item.id + item.name} item={item} />
-              ))}
-            </section>
-          )}
-        </>
-      )}
-    </main>
+
+            <p className={styles.resultCount} aria-live="polite">
+              {filteredItems.length} item{filteredItems.length === 1 ? "" : "s"} found
+            </p>
+
+            {filteredItems.length === 0 ? (
+              <section className={styles.noResults} role="status">
+                <p>No pantry items match your search or category filter.</p>
+                <button className={styles.actionButton} type="button" onClick={clearFilters}>
+                  Clear filters
+                </button>
+              </section>
+            ) : (
+              <section className={styles.menuGrid} aria-label="Available food items">
+                {filteredItems.map((item) => (
+                  <FoodCard key={item.id + item.name} item={item} />
+                ))}
+              </section>
+            )}
+          </>
+        )}
+      </main>
+    </div>
   );
 }
