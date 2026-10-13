@@ -50,8 +50,8 @@ export async function POST(request: Request) {
   if (typeof item.category !== "string" || item.category.trim() === "") {
     errors.push("Category is required and must be a non-empty string");
   }
-  if (typeof item.quantity !== "number" || item.quantity <= 0) {
-    errors.push("Quantity is required and must be a positive number");
+  if (typeof item.quantity !== "number" || item.quantity <= 0 || !Number.isInteger(item.quantity)) {
+    errors.push("Quantity is required and must be a positive whole number");
   }
   if (errors.length > 0) {
     return NextResponse.json({ errors }, { status: 400 });
