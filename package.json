@@ -9,7 +9,7 @@
     "lint": "next lint",
     "lint:fix": "next lint --fix",
     "format": "prettier --write .",
-    "test": "echo 'Install jest (or another unit test suite) to use this command.'",
+    "test": "vitest run",
     "prepare": "husky"
   },
   "dependencies": {
@@ -21,16 +21,24 @@
     "react-router-dom": "^7.18.4"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^7.0.1",
+    "@testing-library/react": "^16.3.3",
+    "@testing-library/user-event": "^14.6.7",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@vitejs/plugin-react": "^4.7.0",
     "eslint": "^8",
     "eslint-config-next": "^14",
     "eslint-config-prettier": "^9",
     "eslint-plugin-prettier": "^5",
     "husky": "^9",
+    "jsdom": "^26.1.0",
     "lint-staged": "^15",
     "prettier": "^3",
-    "typescript": "^5"
+    "typescript": "^5",
+    "vite": "^6.4.4",
+    "vite-tsconfig-paths": "^6.1.1",
+    "vitest": "^3.2.7"
   }
 }
